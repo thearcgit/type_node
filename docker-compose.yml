@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: prisma_type
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  node:
+    build: .
+    container_name: type_node
+    image: type-prisma-node:v1.0.0
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      DB_URL: "${DB_URL}"
+      NODE_ENV : development
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:

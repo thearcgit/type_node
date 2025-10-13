@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PORT: 8010
+      DB_URL: postgresql://neondb_owner:npg_T7aRIZHWszm3@ep-weathered-lake-adanew21-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require&connect_timeout=30
+      DIRECT_URL: postgresql://neondb_owner:npg_T7aRIZHWszm3@ep-weathered-lake-adanew21.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require&connect_timeout=30
+      POSTGRES_DB: mydb
+      POSTGRES_USER: neondb_owner
+      POSTGRES_PASSWORD: npg_yBnGHu5qPzk6
+      POSTGRES_PORT: 5432
+      
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install Dependencies
+        run: npm install  
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      - name: Build and Start Containers
+        run: docker-compose up -d --build
+
+      - name: Check Running Containers
+        run: docker ps
+
+        
