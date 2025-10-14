@@ -19,7 +19,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
         
-        # Step 4: Check required secrets
+        # Step 4: Check required secrets---
       - name: Check required secrets
         run: |
           if [ -z "${{ secrets.DOCKERHUB_USERNAME }}" ]; then
