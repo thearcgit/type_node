@@ -24,7 +24,7 @@ RUN npm run build
 EXPOSE 8010
 
 # Command to run the application
-# CMD ["npm", "start"]
-CMD ["npm", "run","dev" ]
+CMD ["npm", "start"]
+# CMD ["npm", "run","dev" ]
 
 # CMD ["npx", "ts-node-dev", "--respawn", "--transpile-only", "--loader", "ts-node/esm", "src/server.ts"]
