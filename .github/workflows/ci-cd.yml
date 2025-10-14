@@ -18,6 +18,14 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+
+      - name: Debug Secrets
+        run: |
+          echo "DOCKERHUB_USERNAME is set: $([ -z "${{ secrets.DOCKERHUB_USERNAME }}" ] && echo 'no' || echo 'yes')"
+          echo "DOCKERHUB_TOKEN is set: $([ -z "${{ secrets.DOCKERHUB_TOKEN }}" ] && echo 'no' || echo 'yes')"
+          echo "DB_URL is set: $([ -z "${{ secrets.DB_URL }}" ] && echo 'no' || echo 'yes')"
+          echo "PORT is set: $([ -z "${{ secrets.PORT }}" ] && echo 'no' || echo 'yes')"
+          echo "DIRECT_URL is set: $([ -z "${{ secrets.DIRECT_URL }}" ] && echo 'no' || echo 'yes')"
         
         # Step 4: Check required secrets---
       - name: Check required secrets
