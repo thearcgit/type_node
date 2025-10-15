@@ -27,27 +27,6 @@ jobs:
           echo "PORT is set: $([ -z "${{ secrets.PORT }}" ] && echo 'no' || echo 'yes')"
           echo "DIRECT_URL is set: $([ -z "${{ secrets.DIRECT_URL }}" ] && echo 'no' || echo 'yes')"
         
-        # Step 4: Check required secrets---
-      - name: Check required secrets
-        run: |
-          if [ -z "${{ secrets.DOCKERHUB_USERNAME }}" ]; then
-            echo "Error: DOCKERHUB_USERNAME secret is missing!"
-            exit 1
-          fi
-          if [ -z "${{ secrets.DOCKERHUB_TOKEN }}" ]; then
-            echo "Error: DOCKERHUB_TOKEN secret is missing!"
-            exit 1
-          fi
-          if [ -z "${{ secrets.DB_URL }}" ]; then
-            echo "Error: DB_URL secret is missing!"
-            exit 1
-          fi
-          if [ -z "${{ secrets.PORT }}" ]; then
-            echo "Error: PORT secret is missing!"
-            exit 1
-          fi
-
-
       - name: Generate Prisma Client
         run: npx prisma generate
         env:

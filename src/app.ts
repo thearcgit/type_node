@@ -7,7 +7,7 @@ const app = express()
 
 app.use(express.json())
 app.get(`/`,(req:Request,res:Response)=> {
-    console.log("server is running with CI/CD")
+    console.log("server is running with CI")
     res.json({message:`Server is running!`})
 } )
 
